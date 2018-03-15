@@ -1,14 +1,14 @@
 [  
-    {  
-       "type":"TRUE_FALSE",
-       "level":1,
-       "question":"In <em>X-Men</em>, Wolverine is able to turn into a ball of fire.",
-       "answers":[  
-          "Fact",
-          "Fiction"
-       ],
-       "correct":2,
-       "explanation":"Wolverine has sharp claws and is very resilient."
+    {
+        "type":"TRUE_FALSE",
+        "level":1,
+        "question":"In <em>X-Men</em>, Wolverine is able to turn into a ball of fire.",
+        "answers":[  
+            "Fact",
+            "Fiction"
+        ],
+        "correct":2,
+        "explanation":"Wolverine has sharp claws and is very resilient."
     },
     {  
        "type":"TRUE_FALSE",

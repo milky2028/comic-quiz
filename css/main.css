@@ -47,7 +47,7 @@
     background-position: center;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    margin-right: 1vw;
+    margin-right: 4vw;
     font-family: "Bangers", sans-serif;
     justify-self: end;
     align-self: center;
@@ -55,6 +55,8 @@
     font-size: 4em;
     text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
     grid-area: bottom;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .dialog {

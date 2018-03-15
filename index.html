@@ -20,11 +20,12 @@
                 <div class="dialog">
                     <h4 id="description"></h4>
                 </div>
-                <button id="begin" class="begin-btn">Begin</button>
+                <a href="/question.html" class="begin-btn">Begin</a>
+                <!-- <button id="begin" class="begin-btn">Begin</button> -->
             </div>
         </div>
 
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
@@ -34,11 +35,39 @@
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
         <script type="text/javascript">
-        // fetch JSON from quiz
+            // Bind listener to document object
+            // Intercept anchors and prevent default behavior
+            // document.addEventListener('click', function(e) {
+            // var el = e.target;
+
+            // // Go up in the nodelist until we find a node with .href (HTMLAnchorElement)
+            // while (el && !el.href) {
+            //     el = el.parentNode
+            // }
+
+            // if (el) {
+            //     e.preventDefault()
+            //     history.pushState(null, null, el.href)
+            //     changePage()
+
+            //     return
+            //     }
+            // })
+
+            // function loadPage(url) {
+            //     return fetch(url, {
+            //         method: 'GET'
+            //     })
+            // .then(function(response) {
+            //     return response.text()
+            //     })
+            // }
+
+            // fetch JSON from quiz
             fetch('data/quiz.json')
             .then(response => response.json())
             .then(quiz => {
-                var $ = function (id) {
+                var $ = function(id) {
                     return document.getElementById(id)
                 }
                 // console.log(quiz)
@@ -53,7 +82,7 @@
                 console.error('Error fetching JSON:', error)
             })
 
-            document.addEventListener("click", () => {
+            document.getElementById('begin').addEventListener("click", () => {
                 alert('Button clicked.')
             })
         </script>
