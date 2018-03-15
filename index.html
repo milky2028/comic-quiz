@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta id="meta-description" name="description">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    </head>
+    <body>
+        <div class="outer-grid">
+            <div class="inner-grid">
+                <h1 id="title" class="title"></h1>
+                <img class="krypton" src="img/krypton.png" alt="Superman's Home Planet Krypton explodes!">
+                <div class="dialog">
+                    <h4 id="description"></h4>
+                </div>
+                <button id="begin" class="begin-btn">Begin</button>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
+        <script type="text/javascript">
+        // fetch JSON from quiz
+            fetch('data/quiz.json')
+            .then(response => response.json())
+            .then(quiz => {
+                var $ = function (id) {
+                    return document.getElementById(id)
+                }
+                // console.log(quiz)
+                document.title = quiz.title
+                $('meta-description').setAttribute('content', quiz.description)
+                $('title').innerHTML = quiz.title
+                $('description').innerHTML = quiz.description
+                // var meta = document.getElementsByTagName('meta')
+                // console.log(meta)
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error)
+            })
+
+            document.addEventListener("click", () => {
+                alert('Button clicked.')
+            });
+        </script >
+    </body>
+</html>

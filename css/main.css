@@ -1,0 +1,108 @@
+@import url(//fonts.googleapis.com/css?family=Patrick+Hand+SC|Bangers);
+
+.outer-grid {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    justify-items: center;
+    align-items: center;
+}
+
+.inner-grid {
+    display: grid;
+    height: 93vh;
+    width: 93vw;
+    background:#fff;
+    border: solid black;
+    border-color: black;
+    border-width: 3px 3px 5px 5px;
+    border-radius:1% 98% 1% 98%/98% 1% 92% 2%;
+    grid-template-areas: 
+        "top"
+        "center"
+        "bottom";
+    background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #038ecf 0, #51cbf1 30%, #7ff9ff 50%, #51cbf1 70%, #038ecf 100%);
+    background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+}
+
+.title {
+    font-family: "Bangers", sans-serif;
+    color: #222;
+    font-size: 3em;
+    text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
+    grid-area: top;
+    text-align: center;
+    margin-top: 2vh;
+    padding: 10px;
+    background-color: #fff;
+    align-self: start;
+    justify-self: center;
+}
+
+.begin-btn {
+    background: url('../pop.svg');
+    border: none;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-right: 1vw;
+    font-family: "Bangers", sans-serif;
+    justify-self: end;
+    align-self: center;
+    color: #222;
+    font-size: 4em;
+    text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
+    grid-area: bottom;
+}
+
+.dialog {
+    position: absolute;
+    max-height: 150px;
+    max-width: 200px;
+    margin-top: 22vh;
+    margin-left: 3vw;
+    grid-area: top;
+    display: grid;
+    justify-self: start;
+    align-self: end;
+    justify-items: center;
+    align-items: center;
+    padding: 0px 10px;
+    background-color: #fff;
+    -webkit-filter: drop-shadow(0 4px 0 #f3655d);
+    filter: drop-shadow(0 4px 0 #f3655d);
+    -moz-transition: 2s;
+    -o-transition: 2s;
+    -webkit-transition: 2s;
+    transition: 2s;
+    text-align: center;
+    height: 65%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+h4 {
+    font-family: "Patrick Hand SC", sans-serif;
+    color: #222;
+    font-size: 0.95em;
+    text-align: center;
+    padding: 10px;
+}
+
+.krypton {
+    margin-bottom: -25px;
+    max-width: 550px;
+    align-self: end;
+    justify-self: center;
+    width: 90vw;
+    grid-area: center;
+}
+
+@media (max-width: 580px) {
+    .title { 
+        background-color: transparent;
+    }
+}
