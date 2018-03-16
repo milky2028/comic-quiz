@@ -1,4 +1,14 @@
-@import url(//fonts.googleapis.com/css?family=Patrick+Hand+SC|Bangers);
+@import url(//fonts.googleapis.com/css?family=Bangers);
+@font-face {
+    font-family: 'Back Issues';
+    src: url('../fonts/BackIssuesBB_reg.otf')
+}
+
+body {
+    font-family: "Bangers", sans-serif;
+    color: #222;
+    text-align: center;
+}
 
 .outer-grid {
     display: grid;
@@ -28,12 +38,9 @@
 }
 
 .title {
-    font-family: "Bangers", sans-serif;
-    color: #222;
     font-size: 3em;
     text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
     grid-area: top;
-    text-align: center;
     margin-top: 2vh;
     padding: 10px;
     background-color: #fff;
@@ -61,25 +68,17 @@
 
 .dialog {
     position: absolute;
+    font-size: 0.8em;
+    text-transform: uppercase;
     max-height: 150px;
     max-width: 200px;
     margin-top: 22vh;
     margin-left: 3vw;
-    grid-area: top;
-    display: grid;
-    justify-self: start;
-    align-self: end;
-    justify-items: center;
-    align-items: center;
-    padding: 0px 10px;
+    padding: 0px 15px;
     background-color: #fff;
     -webkit-filter: drop-shadow(0 4px 0 #f3655d);
     filter: drop-shadow(0 4px 0 #f3655d);
-    -moz-transition: 2s;
-    -o-transition: 2s;
-    -webkit-transition: 2s;
-    transition: 2s;
-    text-align: center;
+    text-transform: uppercase;
     height: 65%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -87,10 +86,9 @@
 }
 
 h4 {
-    font-family: "Patrick Hand SC", sans-serif;
+    font-family: "Back Issues", sans-serif;
     color: #222;
     font-size: 0.95em;
-    text-align: center;
     padding: 10px;
 }
 
@@ -103,8 +101,38 @@ h4 {
     grid-area: center;
 }
 
+.question {
+    font-family: 'Back Issues';
+    font-size: 1.3em;
+    max-width: 450px;
+    padding: 10px;
+    padding: 35px;
+}
+
+blockquote.bubble { 
+    display: grid;
+    justify-self: center;
+    justify-items: center;
+    background: url('../speech-bubble.svg'); 
+    background-position: center;
+    background-size: 100% 100%;
+    max-height: 150px;
+    max-width: 550px;
+    background-repeat: no-repeat;
+    padding-top: 6%;
+    padding-bottom: 20%;
+    box-sizing: content-box;
+    line-height: 1;
+    grid-area: center;
+}
+
 @media (max-width: 580px) {
     .title { 
         background-color: transparent;
+    }
+
+    .question {
+        padding: 15px;
+        margin-top: 5px;
     }
 }

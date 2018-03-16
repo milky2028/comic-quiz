@@ -8,83 +8,78 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     </head>
     <body>
         <div class="outer-grid">
-            <div class="inner-grid">
+            <div id="innerGrid" class="inner-grid">
                 <h1 id="title" class="title"></h1>
-                <img class="krypton" src="img/krypton.png" alt="Superman's Home Planet Krypton explodes!">
-                <div class="dialog">
+                <img id="krypton" class="krypton" src="img/krypton.png" alt="Superman's Home Planet Krypton explodes!">
+                <div id="dialog" class="dialog">
                     <h4 id="description"></h4>
                 </div>
-                <a href="/question.html" class="begin-btn">Begin</a>
-                <!-- <button id="begin" class="begin-btn">Begin</button> -->
+                <template>
+                    <blockquote id="bubble" class="bubble">
+                        <h2 id="questionHead" class="question"></h2>
+                    </blockquote>
+                </template>
+                <button id="begin" onclick="transitionOutIntro()" class="begin-btn">Begin</button>
             </div>
         </div>
 
         <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
         <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
-        <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
         <script type="text/javascript">
-            // Bind listener to document object
-            // Intercept anchors and prevent default behavior
-            // document.addEventListener('click', function(e) {
-            // var el = e.target;
-
-            // // Go up in the nodelist until we find a node with .href (HTMLAnchorElement)
-            // while (el && !el.href) {
-            //     el = el.parentNode
-            // }
-
-            // if (el) {
-            //     e.preventDefault()
-            //     history.pushState(null, null, el.href)
-            //     changePage()
-
-            //     return
-            //     }
-            // })
-
-            // function loadPage(url) {
-            //     return fetch(url, {
-            //         method: 'GET'
-            //     })
-            // .then(function(response) {
-            //     return response.text()
-            //     })
-            // }
-
-            // fetch JSON from quiz
+            var $ = function(id) {
+                    return document.getElementById(id)
+                }
+            // fetch quiz data, error if failed
             fetch('data/quiz.json')
             .then(response => response.json())
             .then(quiz => {
-                var $ = function(id) {
-                    return document.getElementById(id)
-                }
-                // console.log(quiz)
+                console.log('Quiz data loaded.')
                 document.title = quiz.title
                 $('meta-description').setAttribute('content', quiz.description)
                 $('title').innerHTML = quiz.title
                 $('description').innerHTML = quiz.description
-                // var meta = document.getElementsByTagName('meta')
-                // console.log(meta)
             })
             .catch(error => {
-                console.error('Error fetching JSON:', error)
+                console.error('Error fetching quiz data:', error)
             })
 
-            document.getElementById('begin').addEventListener("click", () => {
-                alert('Button clicked.')
-            })
+            function transitionOutIntro() {
+                var begin = $('begin')
+                var dialog = $('dialog')
+                var krypton = $('krypton')
+                begin.classList.add('animated', 'fadeOutRightBig')
+                dialog.classList.add('animated', 'fadeOutLeftBig')
+                krypton.classList.add('animated', 'flipOutY')
+
+                // fetch question data, error if failed
+                fetch('data/questions.json')
+                .then(response => response.json())
+                .then(questions => {
+                    var temp = document.getElementsByTagName("template")[0];
+                    var clon = temp.content.cloneNode(true);
+                    document.getElementById('innerGrid').appendChild(clon);
+
+                    var bubble = $('bubble')
+                    bubble.classList.add('animated', 'bounceIn')
+
+                    var questionNumber = 0
+                    $('questionHead').innerHTML = questions[questionNumber].question
+
+                    console.log('Question data loaded.')
+                    console.log(questions[0].question)
+                })
+                .catch(error => {
+                    console.error('Error fetching question data:', error)
+                })
+            }
         </script>
     </body>
 </html>
