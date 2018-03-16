@@ -31,7 +31,8 @@
                         <h3 id="answer2" class="answers"></h3>
                     </div>
                 </template>
-                <template>
+                <template id="nextTemp">
+
                     <h2 class="next">Next >></h2>
                 </template>
                 <button id="begin" onclick="transitionOutIntro()" class="begin-btn">Begin</button>
@@ -74,7 +75,7 @@
                 fetch('data/questions.json')
                 .then(response => response.json())
                 .then(questions => {
-                    // attach template HTML
+                    // attach question template HTML
                     var temp = document.getElementsByTagName("template")[0];
                     var clon = temp.content.cloneNode(true);
                     document.getElementById('innerGrid').appendChild(clon);
@@ -99,7 +100,7 @@
                     document.getElementById('answersGrid').addEventListener("click", 
                         function answerCheck(e) {
                         // check for correct answer
-                        if (e.target.id == 'answer' + questions[questionNumber].correct) {
+                        if (e.target.id === 'answer' + questions[questionNumber].correct) {
                             //fade out question
                             $('bubble').classList.add('animated', 'bounceOut')
                             $('answersGrid').classList.add('animated', 'fadeOut')
@@ -109,13 +110,14 @@
                             updateScore()
 
                             //fade in correct answer, explanation, and next question button
-                            var temp = document.getElementsByTagName("template")[1];
+                            var temp = $('nextTemp', '');
                             var clon = temp.content.cloneNode(true);
-                            document.getElementById('answersGrid').appendChild(clon);
+                            document.getElementById('innerGrid').appendChild(clon);
 
                             console.log("correct answer")
                             console.log(score)
                         } else {
+                            $(e.target.id).classList.add('animated', 'shake')
                             console.log("You are an idiot")
                         }
 
