@@ -25,6 +25,14 @@
                     <blockquote id="bubble" class="bubble">
                         <h2 id="questionHead" class="question"></h2>
                     </blockquote>
+                    <h3 id="score" class="score"></h3>
+                    <div id="answersGrid" class="answers-grid">
+                        <h3 id="answer1" class="answers"></h3>
+                        <h3 id="answer2" class="answers"></h3>
+                    </div>
+                </template>
+                <template>
+                    <h2 class="next">Next >></h2>
                 </template>
                 <button id="begin" onclick="transitionOutIntro()" class="begin-btn">Begin</button>
             </div>
@@ -34,6 +42,7 @@
         <script src="js/main.js"></script>
 
         <script type="text/javascript">
+        // shorten id calls
             var $ = function(id) {
                     return document.getElementById(id)
                 }
@@ -41,6 +50,7 @@
             fetch('data/quiz.json')
             .then(response => response.json())
             .then(quiz => {
+                // set content from quiz data
                 console.log('Quiz data loaded.')
                 document.title = quiz.title
                 $('meta-description').setAttribute('content', quiz.description)
@@ -52,6 +62,7 @@
             })
 
             function transitionOutIntro() {
+                // animate out intro page
                 var begin = $('begin')
                 var dialog = $('dialog')
                 var krypton = $('krypton')
@@ -63,18 +74,57 @@
                 fetch('data/questions.json')
                 .then(response => response.json())
                 .then(questions => {
+                    // attach template HTML
                     var temp = document.getElementsByTagName("template")[0];
                     var clon = temp.content.cloneNode(true);
                     document.getElementById('innerGrid').appendChild(clon);
-
+                    
+                    //animate question entry
                     var bubble = $('bubble')
                     bubble.classList.add('animated', 'bounceIn')
 
+                    // set question number and append question data
                     var questionNumber = 0
                     $('questionHead').innerHTML = questions[questionNumber].question
+                    $('answer1').innerHTML = questions[questionNumber].answers[0]
+                    $('answer2').innerHTML = questions[questionNumber].answers[1]
 
+                    // track user's score
+                    var score = 0
+                    function updateScore() {
+                        $('score').innerHTML = 'Score: ' + score
+                    }
+                    updateScore()
+
+                    document.getElementById('answersGrid').addEventListener("click", 
+                        function answerCheck(e) {
+                        // check for correct answer
+                        if (e.target.id == 'answer' + questions[questionNumber].correct) {
+                            //fade out question
+                            $('bubble').classList.add('animated', 'bounceOut')
+                            $('answersGrid').classList.add('animated', 'fadeOut')
+                            
+                            // update score
+                            score++
+                            updateScore()
+
+                            //fade in correct answer, explanation, and next question button
+                            var temp = document.getElementsByTagName("template")[1];
+                            var clon = temp.content.cloneNode(true);
+                            document.getElementById('answersGrid').appendChild(clon);
+
+                            console.log("correct answer")
+                            console.log(score)
+                        } else {
+                            console.log("You are an idiot")
+                        }
+
+                        // console.log('answer' + questions[questionNumber].correct)
+                        // console.log(e.target.id)
+                    })
+                    
                     console.log('Question data loaded.')
-                    console.log(questions[0].question)
+                    // console.log(questions[0].question)
                 })
                 .catch(error => {
                     console.error('Error fetching question data:', error)
