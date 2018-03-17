@@ -32,8 +32,7 @@
                     </div>
                 </template>
                 <template id="nextTemp">
-
-                    <h2 class="next">Next >></h2>
+                    <h2 id="next" class="next">Next >></h2>
                 </template>
                 <button id="begin" onclick="transitionOutIntro()" class="begin-btn">Begin</button>
             </div>
@@ -113,6 +112,7 @@
                             var temp = $('nextTemp', '');
                             var clon = temp.content.cloneNode(true);
                             document.getElementById('innerGrid').appendChild(clon);
+                            $('next').classList.add('animated', 'fadeIn')
 
                             console.log("correct answer")
                             console.log(score)
