@@ -21,7 +21,7 @@
                 <div id="dialog" class="dialog">
                     <h4 id="description"></h4>
                 </div>
-                <template>
+                <template id="questionTemplate">
                     <blockquote id="bubble" class="bubble">
                         <h2 id="questionHead" class="question"></h2>
                     </blockquote>
@@ -31,7 +31,9 @@
                         <h3 id="answer2" class="answers"></h3>
                     </div>
                 </template>
-                <template id="nextTemp">
+                <template id="nextTemplate">
+                    <h2 id="correct" class="correct">Correct!</h2>
+                    <h3 id="explanation" class="explanation"></h3>
                     <h2 id="next" class="next">Next >></h2>
                 </template>
                 <button id="begin" onclick="transitionOutIntro()" class="begin-btn">Begin</button>
@@ -43,9 +45,17 @@
 
         <script type="text/javascript">
         // shorten id calls
-            var $ = function(id) {
+            const $ = function(id) {
                     return document.getElementById(id)
                 }
+
+            // append template HTML
+            function appendTemplate(childId, parentId) {
+                    var temp = $(childId)
+                    var clon = temp.content.cloneNode(true)
+                    document.getElementById(parentId).appendChild(clon)
+                }
+
             // fetch quiz data, error if failed
             fetch('data/quiz.json')
             .then(response => response.json())
@@ -63,27 +73,27 @@
 
             function transitionOutIntro() {
                 // animate out intro page
-                var begin = $('begin')
-                var dialog = $('dialog')
-                var krypton = $('krypton')
-                begin.classList.add('animated', 'fadeOutRightBig')
-                dialog.classList.add('animated', 'fadeOutLeftBig')
-                krypton.classList.add('animated', 'flipOutY')
+                $('begin').classList.add('animated', 'fadeOutRightBig')
+                $('dialog').classList.add('animated', 'fadeOutLeftBig')
+                $('krypton').classList.add('animated', 'flipOutY')
 
                 // fetch question data, error if failed
                 fetch('data/questions.json')
                 .then(response => response.json())
                 .then(questions => {
-                    // attach question template HTML
-                    var temp = document.getElementsByTagName("template")[0];
-                    var clon = temp.content.cloneNode(true);
-                    document.getElementById('innerGrid').appendChild(clon);
-                    
-                    //animate question entry
-                    var bubble = $('bubble')
-                    bubble.classList.add('animated', 'bounceIn')
+                    // loop through questions
+                    questions.forEach(question => {
+                        console.log(question)
+                    });
 
-                    // set question number and append question data
+
+                    // append question template HTML
+                    appendTemplate('questionTemplate', 'innerGrid')
+                    
+                    // animate question entry
+                    $('bubble').classList.add('animated', 'bounceIn')
+
+                    // set question number and question data
                     var questionNumber = 0
                     $('questionHead').innerHTML = questions[questionNumber].question
                     $('answer1').innerHTML = questions[questionNumber].answers[0]
@@ -102,17 +112,26 @@
                         if (e.target.id === 'answer' + questions[questionNumber].correct) {
                             //fade out question
                             $('bubble').classList.add('animated', 'bounceOut')
-                            $('answersGrid').classList.add('animated', 'fadeOut')
+                            var answersGrid = $('answersGrid')
+                            answersGrid.classList.add('animated', 'fadeOut')
                             
                             // update score
                             score++
                             updateScore()
 
-                            //fade in correct answer, explanation, and next question button
-                            var temp = $('nextTemp', '');
-                            var clon = temp.content.cloneNode(true);
-                            document.getElementById('innerGrid').appendChild(clon);
-                            $('next').classList.add('animated', 'fadeIn')
+                            // fade in correct answer, explanation, and next question button
+                            appendTemplate('nextTemplate', 'innerGrid')
+                            $('explanation').innerHTML = questions[questionNumber].explanation
+
+                            // fade in correct, explanation, and next
+                            var explanation = $('explanation')
+                            explanation.classList.add('animated', 'fadeIn')
+                            var next = $('next')
+                            next.classList.add('animated', 'fadeIn')
+                            $('correct').classList.add('animated', 'tada')
+
+                            // increment question number
+                            questionNumber++
 
                             console.log("correct answer")
                             console.log(score)

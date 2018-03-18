@@ -8,6 +8,7 @@ body {
     font-family: "Bangers", sans-serif;
     color: #222;
     text-align: center;
+    text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
 }
 
 .outer-grid {
@@ -83,6 +84,7 @@ body {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+    text-shadow: none;
 }
 
 h4 {
@@ -120,10 +122,11 @@ blockquote.bubble {
     max-width: 550px;
     background-repeat: no-repeat;
     padding-top: 6%;
-    padding-bottom: 20%;
+    padding-bottom: 16%;
     box-sizing: content-box;
     line-height: 1;
     grid-area: center;
+    text-shadow: none;
 }
 
 .score {
@@ -152,15 +155,29 @@ blockquote.bubble {
     margin-top: 0;
     grid-area: bottom;
     font-size: 3em;
-    text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
     cursor: pointer;
 }
 
 .next {
     grid-area: bottom;
-    text-shadow: -1.5px -1.5px yellow, 1.5px 1.5px orange,  2.5px 2.5px orange;
     cursor: pointer;
     font-size: 4em;
+}
+
+.explanation {
+    grid-area: center;
+    font-size: 3em;
+    align-self: center;
+    max-width: 650px;
+    padding-right: 15px;
+    padding-left: 15px;
+    justify-self: center;
+}
+
+.correct {
+    font-size: 4em;
+    grid-area: center;
+    align-self: start;
 }
 
 @media (max-width: 580px) {
