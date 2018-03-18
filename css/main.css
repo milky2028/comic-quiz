@@ -189,4 +189,12 @@ blockquote.bubble {
         padding: 15px;
         margin-top: 5px;
     }
+
+    .correct {
+        font-size: 3em;
+    }
+
+    .explanation {
+        font-size: 2em;
+    }
 }
