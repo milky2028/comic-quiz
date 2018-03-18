@@ -14,12 +14,13 @@ function appendTemplate(childId, parentId) {
 fetch('data/quiz.json')
 .then(response => response.json())
 .then(quiz => {
-    // set content from quiz data
+    // set document content from quiz data
     console.log('Quiz data loaded.')
     document.title = quiz.title
     $('meta-description').setAttribute('content', quiz.description)
     $('title').innerHTML = quiz.title
     $('description').innerHTML = quiz.description
+
 })
 .catch(error => {
     console.error('Error fetching quiz data:', error)
@@ -87,16 +88,10 @@ function beginQuestionFlow() {
                 console.log(score)
             } else {
                 $(e.target.id).classList.add('animated', 'shake')
-                // $(e.target.id).classList.remove('animated', 'shake')
                 console.log("You are an idiot")
             }
-
-            // console.log('answer' + questions[questionNumber].correct)
-            // console.log(e.target.id)
         })
-        
         console.log('Question data loaded.')
-        // console.log(questions[0].question)
     })
     .catch(error => {
         console.error('Error fetching question data:', error)
