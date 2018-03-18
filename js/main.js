@@ -55,7 +55,7 @@ function beginQuestionFlow() {
         // track user's score
         var score = 0
         function updateScore() {
-            $('score').innerHTML = 'Score: ' + score
+            $('score').innerHTML = 'Score: ' + score + '/' + questions.length
         }
         updateScore()
 
