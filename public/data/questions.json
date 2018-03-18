@@ -13,7 +13,7 @@
     {  
        "type":"TRUE_FALSE",
        "level":3,
-       "question":"Superman�s high-school girlfriend was named Lana Lang.",
+       "question":"Superman's high-school girlfriend was named Lana Lang.",
        "answers":[  
           "Fact",
           "Fiction"
@@ -24,7 +24,7 @@
     {  
        "type":"TRUE_FALSE",
        "level":1,
-       "question":"Venom was an enemy of Spider-Man�s.",
+       "question":"Venom was an enemy of Spider-Man's.",
        "answers":[  
           "Fact",
           "Fiction"

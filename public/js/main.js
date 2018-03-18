@@ -1,5 +1,5 @@
 // shorten id calls
-const $ = function(id) {
+var $ = function(id) {
     return document.getElementById(id)
 }
 
@@ -15,7 +15,6 @@ fetch('data/quiz.json')
 .then(response => response.json())
 .then(quiz => {
     // set document content from quiz data
-    console.log('Quiz data loaded.')
     document.title = quiz.title
     $('meta-description').setAttribute('content', quiz.description)
     $('title').innerHTML = quiz.title
@@ -36,27 +35,24 @@ function beginQuestionFlow() {
     fetch('data/questions.json')
     .then(response => response.json())
     .then(questions => {
-        // loop through questions
-        questions.forEach(question => {
-            console.log(question.question)
-        });
-
         // append question template HTML
         appendTemplate('questionTemplate', 'innerGrid')
-        
-        // animate question entry
-        $('bubble').classList.add('animated', 'bounceIn')
 
         // set question number and question data
         var questionNumber = 0
+
+        // // set question data
         $('questionHead').innerHTML = questions[questionNumber].question
         $('answer1').innerHTML = questions[questionNumber].answers[0]
         $('answer2').innerHTML = questions[questionNumber].answers[1]
+    
+        // // animate question entry
+        $('bubble').classList.add('animated', 'bounceIn')
 
         // track user's score
         var score = 0
         function updateScore() {
-            $('score').innerHTML = 'Score: ' + score + '/' + questions.length
+            $('score').innerHTML = `Score: ${score}/${questions.length}`
         }
         updateScore()
 
@@ -67,10 +63,6 @@ function beginQuestionFlow() {
                 //fade out question
                 $('bubble').classList.add('animated', 'bounceOut')
                 $('answersGrid').classList.add('animated', 'fadeOut')
-                
-                // update score
-                score++
-                updateScore()
 
                 // fade in correct answer, explanation, and next question button
                 appendTemplate('nextTemplate', 'innerGrid')
@@ -81,19 +73,17 @@ function beginQuestionFlow() {
                 $('next').classList.add('animated', 'fadeIn')
                 $('correct').classList.add('animated', 'tada')
 
-                // increment question number
-                questionNumber++
-
-                console.log("correct answer")
-                console.log(score)
+                 // update score
+                 score++
+                 updateScore()
             } else {
                 $(e.target.id).classList.add('animated', 'shake')
-                console.log("You are an idiot")
             }
         })
-        console.log('Question data loaded.')
     })
     .catch(error => {
         console.error('Error fetching question data:', error)
     })
 }
+
+$('begin').addEventListener('click', beginQuestionFlow)

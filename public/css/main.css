@@ -38,6 +38,10 @@ body {
     background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
 }
 
+a {
+    color: #333;
+}
+
 a:visited {
     color: inherit;
 }
@@ -174,7 +178,7 @@ blockquote.bubble {
 
 .explanation {
     grid-area: center;
-    font-size: 3em;
+    font-size: 2.5em;
     align-self: center;
     max-width: 650px;
     padding-right: 15px;
