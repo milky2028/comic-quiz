@@ -23,7 +23,7 @@ body {
 
 .inner-grid {
     display: grid;
-    height: 92vh;
+    height: 90vh;
     width: 92vw;
     background:#fff;
     border: solid black;
@@ -120,8 +120,10 @@ h4 {
     font-family: 'Back Issues';
     font-size: 1.3em;
     max-width: 450px;
-    padding: 10px;
-    padding: 35px;
+    padding-top: 20px;
+    padding-bottom: 35px;
+    padding-right: 35px;
+    padding-left: 35px;
 }
 
 blockquote.bubble { 
@@ -150,6 +152,7 @@ blockquote.bubble {
 
 .answers-grid {
     display: grid;
+    grid-area: bottom;
     grid-template-areas: 
         "left right";
     grid-column: 1fr 1fr;
@@ -172,11 +175,12 @@ blockquote.bubble {
 }
 
 .next {
-    grid-column-start: left;
-    grid-column-end: right;
+    justify-self: center;
+    grid-area: bottom;
     cursor: pointer;
     font-size: 4em;
-    align-self: start;
+    margin-top: 5px;
+    margin-bottom: 5px;
     z-index: 2;
 }
 
@@ -196,6 +200,11 @@ blockquote.bubble {
     align-self: start;
 }
 
+.active {
+    opacity: 1;
+    z-index: 2;
+}
+
 @media (max-width: 580px) {
     .title { 
         background-color: transparent;
@@ -203,7 +212,7 @@ blockquote.bubble {
 
     .question {
         padding: 15px;
-        margin-top: 5px;
+        margin-top: 10px;
     }
 
     .correct {

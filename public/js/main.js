@@ -46,17 +46,23 @@ function beginQuestionFlow() {
         function updateScore() {
             $('score').innerHTML = `Score: ${score}/${questions.length}`
         }
+        updateScore()
 
         // set question data
         function setQuestionData() {
             // remove previous question animations
             if (questionNumber !== 0) {
+                $('bubble').classList.remove('animated', 'bounceOut')
+                $('answer1').classList.remove('animated', 'fadeOut')
+                $('answer2').classList.remove('animated', 'fadeOut')
+
+                $('answer1').classList.add('animated', 'fadeIn')
+                $('answer2').classList.add('animated', 'fadeIn')
+
+            } else {
                 setTimeout(() => {
                     $('innerGrid').removeChild($('begin'))
                 }, 300);
-
-                $('innerGrid').removeChild($('questionTemplate'))
-                $('bubble').classList.remove('animated', 'bounceOut')
             }
             
             // set question data
@@ -76,9 +82,9 @@ function beginQuestionFlow() {
                 if (e.target.id === 'answer' + questions[questionNumber].correct) {
                     // remove previous animations
                     if (questionNumber !== 0) {
-                        $('explanation').classList.remove('animated', 'fadeIn')
-                        $('next').classList.remove('animated', 'fadeIn')
-                        $('correct').classList.remove('animated', 'tada')
+                        $('explanation').classList.remove('animated', 'fadeIn', 'fadeOut')
+                        $('next').classList.remove('animated', 'fadeIn', 'fadeOut')
+                        $('correct').classList.remove('animated', 'tada', 'fadeOut')
                     }
 
                     //fade out question
@@ -86,20 +92,20 @@ function beginQuestionFlow() {
                     $('answer1').classList.add('animated', 'fadeOut')
                     $('answer2').classList.add('animated', 'fadeOut')
 
-                    // append next question button
-                    appendTemplate('nextTemplate', 'answersGrid')
+                    if (questionNumber === 0) {
+                        // append next question button
+                        appendTemplate('nextTemplate', 'innerGrid')
+                        appendTemplate('explanationTemplate', 'innerGrid')
+                    }
 
                     // append explanation and correct template
-                    appendTemplate('explanationTemplate', 'innerGrid')
+    
                     $('explanation').innerHTML = questions[questionNumber].explanation
 
                     // fade in correct, explanation, and next
                     $('explanation').classList.add('animated', 'fadeIn')
                     $('next').classList.add('animated', 'fadeIn')
                     $('correct').classList.add('animated', 'tada')
-
-                    $('answersGrid').removeChild($('answer1'))
-                    $('answersGrid').removeChild($('answer2'))
 
                     // update score
                     score++
@@ -121,6 +127,9 @@ function beginQuestionFlow() {
                         })
                 } else {
                     $(e.target.id).classList.add('animated', 'shake')
+                    setTimeout(() => {
+                        $(e.target.id).classList.remove('animated', 'shake')
+                    }, 700);
                 }
             })
 
