@@ -7,20 +7,19 @@
         <meta id="meta-description" name="description">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
-
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     </head>
     <body>
         <div class="outer-grid">
+
             <div id="innerGrid" class="inner-grid">
                 <a href="/" class="home-link"><h1 id="title" class="title"></h1></a>
                 <img id="krypton" class="krypton" src="img/krypton.png" alt="Superman's Home Planet Krypton explodes!">
                 <div id="dialog" class="dialog">
                     <h4 id="description"></h4>
                 </div>
+
                 <template id="questionTemplate">
                     <blockquote id="bubble" class="bubble">
                         <h2 id="questionHead" class="question"></h2>
@@ -31,16 +30,24 @@
                         <h3 id="answer2" class="answers"></h3>
                     </div>
                 </template>
-                <template id="nextTemplate">
+
+                <template id="explanationTemplate">
                     <h2 id="correct" class="correct">Correct!</h2>
                     <h3 id="explanation" class="explanation"></h3>
+                </template>
+
+                <template id="nextTemplate">
                     <h2 id="next" class="next">Next >></h2>
                 </template>
+
                 <button id="begin" class="begin-btn">Begin</button>
             </div>
         </div>
 
         <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+        <link rel="stylesheet" href="css/normalize.css">
+
         <script src="js/main.js"></script>
     </body>
 </html>

@@ -5,8 +5,7 @@ var $ = function(id) {
 
 // append template HTML
 function appendTemplate(childId, parentId) {
-    var temp = $(childId)
-    var clon = temp.content.cloneNode(true)
+    var clon = $(childId).content.cloneNode(true)
     $(parentId).appendChild(clon)
 }
 
@@ -52,9 +51,14 @@ function beginQuestionFlow() {
         function setQuestionData() {
             // remove previous question animations
             if (questionNumber !== 0) {
+                setTimeout(() => {
+                    $('innerGrid').removeChild($('begin'))
+                }, 300);
+
+                $('innerGrid').removeChild($('questionTemplate'))
                 $('bubble').classList.remove('animated', 'bounceOut')
-                $('answersGrid').classList.remove('animated', 'fadeOut')
             }
+            
             // set question data
             $('questionHead').innerHTML = questions[questionNumber].question
             $('answer1').innerHTML = questions[questionNumber].answers[0]
@@ -63,6 +67,8 @@ function beginQuestionFlow() {
             // animate question entry
             $('bubble').classList.add('animated', 'bounceIn')
         }
+
+        setQuestionData()
 
         $('answersGrid').addEventListener("click", 
                 function answerCheck(e) {
@@ -74,12 +80,17 @@ function beginQuestionFlow() {
                         $('next').classList.remove('animated', 'fadeIn')
                         $('correct').classList.remove('animated', 'tada')
                     }
+
                     //fade out question
                     $('bubble').classList.add('animated', 'bounceOut')
-                    $('answersGrid').classList.add('animated', 'fadeOut')
+                    $('answer1').classList.add('animated', 'fadeOut')
+                    $('answer2').classList.add('animated', 'fadeOut')
 
-                    // fade in correct answer, explanation, and next question button
-                    appendTemplate('nextTemplate', 'innerGrid')
+                    // append next question button
+                    appendTemplate('nextTemplate', 'answersGrid')
+
+                    // append explanation and correct template
+                    appendTemplate('explanationTemplate', 'innerGrid')
                     $('explanation').innerHTML = questions[questionNumber].explanation
 
                     // fade in correct, explanation, and next
@@ -87,19 +98,23 @@ function beginQuestionFlow() {
                     $('next').classList.add('animated', 'fadeIn')
                     $('correct').classList.add('animated', 'tada')
 
+                    $('answersGrid').removeChild($('answer1'))
+                    $('answersGrid').removeChild($('answer2'))
+
                     // update score
                     score++
                     updateScore()
 
+                    // increment question number
                     questionNumber++
 
                     // reset question when next is clicked
                     $('next').addEventListener('click', 
                         function resetQuestion() {
                             // fade out correct, explanation, and next
-                            $('next').classList.add('fadeOut')
-                            $('correct').classList.add('fadeOut')
-                            $('explanation').classList.add('fadeOut')
+                            $('next').classList.add('animated', 'fadeOut')
+                            $('correct').classList.add('animated', 'fadeOut')
+                            $('explanation').classList.add('animated', 'fadeOut')
 
                             // set next question
                             setQuestionData()
@@ -108,8 +123,6 @@ function beginQuestionFlow() {
                     $(e.target.id).classList.add('animated', 'shake')
                 }
             })
-
-            setQuestionData()
 
         
 
