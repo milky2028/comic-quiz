@@ -63,7 +63,7 @@ a:visited {
 }
 
 .begin-btn {
-    background: url('../pop.svg');
+    background: url('../img/pop.svg');
     border: none;
     background-position: center;
     background-size: 100% 100%;
@@ -120,14 +120,14 @@ h4 {
     font-family: 'Back Issues';
     font-size: 1.25em;
     max-width: 450px;
-    padding-top: 20px 35px 35px 35px;
+    padding: 20px 35px 35px 35px;
 }
 
 blockquote.bubble { 
     display: grid;
     justify-self: center;
     justify-items: center;
-    background: url('../speech-bubble.svg'); 
+    background: url('../img/speech-bubble.svg'); 
     background-position: center;
     background-size: 100% 100%;
     max-height: 150px;
