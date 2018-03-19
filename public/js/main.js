@@ -93,7 +93,7 @@ function beginQuestionFlow() {
                     $('answer2').classList.add('animated', 'fadeOut')
 
                     if (questionNumber === 0) {
-                        // append next question button
+                        // append next question button and question explanation
                         appendTemplate('nextTemplate', 'innerGrid')
                         appendTemplate('explanationTemplate', 'innerGrid')
                     }
@@ -123,6 +123,8 @@ function beginQuestionFlow() {
                             $('explanation').classList.add('animated', 'fadeOut')
 
                             if (questionNumber > 5) {
+                                console.log(questionNumber)
+                                appendTemplate('thanksTemplate', 'innerGrid')
                                 console.log('Reached end of questionaire.')
                             } else {
                                 // set next question
@@ -130,6 +132,7 @@ function beginQuestionFlow() {
                             }
                         })
                 } else {
+                    $(e.target.id).classList.remove('animated', 'fadeIn')
                     $(e.target.id).classList.add('animated', 'shake')
                     setTimeout(() => {
                         $(e.target.id).classList.remove('animated', 'shake')

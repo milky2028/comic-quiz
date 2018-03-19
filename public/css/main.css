@@ -118,7 +118,7 @@ h4 {
 
 .question {
     font-family: 'Back Issues';
-    font-size: 1.3em;
+    font-size: 1.25em;
     max-width: 450px;
     padding-top: 20px;
     padding-bottom: 35px;
@@ -151,6 +151,7 @@ blockquote.bubble {
 }
 
 .answers-grid {
+    margin-top: -10px;
     display: grid;
     grid-area: bottom;
     grid-template-areas: 
@@ -200,6 +201,20 @@ blockquote.bubble {
     align-self: start;
 }
 
+.thanks {
+    grid-area: center;
+    font-size: 2em;
+    align-self: start;
+}
+
+.play-again {
+    grid-area: center;
+    font-size: 2.5em;
+    align-self: end;
+    z-index: 10;
+    padding-bottom: 20px;
+}
+
 @media (max-width: 580px) {
     .title { 
         background-color: transparent;
@@ -207,8 +222,8 @@ blockquote.bubble {
 
     .question {
         padding-top: 5px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 22px;
+        padding-left: 22px;
         padding-bottom: 15px;
         margin-top: 10px;
     }
