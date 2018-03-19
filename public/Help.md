@@ -3,9 +3,10 @@
 For best performance, please use Chrome 65
 
 This quiz has been tested in:
-* Chrome 65 on Windows 10 and Mac OS High Sierra
-* Firefox 59 on Windows 10 and Mac OS High Sierra
-* Chrome on Android 8.1 Oreo
+* Chrome 65 on Windows 10 
+* Firefox 59 on Windows 10
+* Chrome 65 on Android 8.1 Oreo
+* Firefox 59 on Android 8.1 Oreo
 
 Some special things to note about this quiz, were it to be used in production.
 This quiz is reliant on:
