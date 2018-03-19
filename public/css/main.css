@@ -179,9 +179,8 @@ blockquote.bubble {
     grid-area: bottom;
     cursor: pointer;
     font-size: 4em;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-bottom: 5px;
-    z-index: 2;
 }
 
 .explanation {
@@ -195,14 +194,10 @@ blockquote.bubble {
 }
 
 .correct {
+    margin-top: 0;
     font-size: 4em;
     grid-area: center;
     align-self: start;
-}
-
-.active {
-    opacity: 1;
-    z-index: 2;
 }
 
 @media (max-width: 580px) {
@@ -211,7 +206,10 @@ blockquote.bubble {
     }
 
     .question {
-        padding: 15px;
+        padding-top: 5px;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-bottom: 15px;
         margin-top: 10px;
     }
 
@@ -220,6 +218,6 @@ blockquote.bubble {
     }
 
     .explanation {
-        font-size: 2em;
+        font-size: 1.6em;
     }
 }

@@ -122,8 +122,12 @@ function beginQuestionFlow() {
                             $('correct').classList.add('animated', 'fadeOut')
                             $('explanation').classList.add('animated', 'fadeOut')
 
-                            // set next question
-                            setQuestionData()
+                            if (questionNumber > 5) {
+                                console.log('Reached end of questionaire.')
+                            } else {
+                                // set next question
+                                setQuestionData()
+                            }
                         })
                 } else {
                     $(e.target.id).classList.add('animated', 'shake')
@@ -132,95 +136,6 @@ function beginQuestionFlow() {
                     }, 700);
                 }
             })
-
-        
-
-        // for (let questionNumber = 0; questionNumber < questions.length; questionNumber++) (function(questionNumber) {
-        //     console.log(questions[questionNumber].question)
-
-        //     // // set question data
-        //     $('questionHead').innerHTML = questions[questionNumber].question
-        //     $('answer1').innerHTML = questions[questionNumber].answers[0]
-        //     $('answer2').innerHTML = questions[questionNumber].answers[1]
-
-        //     // // animate question entry
-        //     $('bubble').classList.add('animated', 'bounceIn')
-        // })(questionNumber);
-
-        // $('answersGrid').addEventListener("click", 
-        //         function answerCheck(e) {
-        //         // check for correct answer
-        //         if (e.target.id === 'answer' + questions[questionNumber].correct) {
-        //             //fade out question
-        //             $('bubble').classList.add('animated', 'bounceOut')
-        //             $('answersGrid').classList.add('animated', 'fadeOut')
-
-        //             // fade in correct answer, explanation, and next question button
-        //             appendTemplate('nextTemplate', 'innerGrid')
-        //             $('explanation').innerHTML = questions[questionNumber].explanation
-
-        //             // fade in correct, explanation, and next
-        //             $('explanation').classList.add('animated', 'fadeIn')
-        //             $('next').classList.add('animated', 'fadeIn')
-        //             $('correct').classList.add('animated', 'tada')
-
-        //             // update score
-        //             score++
-        //             updateScore()
-
-        //             // go to the next question
-        //             function nextQuestion() {
-        //                 questionNumber++
-        //                 $('next').classList.add('animated', 'fadeOut')
-        //                 $('explanation').classList.add('animated', 'fadeOut')
-        //                 $('correct').classList.add('animated', 'fadeOut')
-        //             }
-
-        //             // next question
-        //             $('next').addEventListener('click', nextQuestion)
-        //         } else {
-        //             $(e.target.id).classList.add('animated', 'shake')
-        //         }
-        //     })
-        // // set question data
-        // $('questionHead').innerHTML = questions[questionNumber].question
-        // $('answer1').innerHTML = questions[questionNumber].answers[0]
-        // $('answer2').innerHTML = questions[questionNumber].answers[1]
-    
-        // // animate question entry
-        // $('bubble').classList.add('animated', 'bounceIn')
-
-        // track user's score
-        // var score = 0
-        // function updateScore() {
-        //     $('score').innerHTML = `Score: ${score}/${questions.length}`
-        // }
-        // updateScore()
-
-        // $('answersGrid').addEventListener("click", 
-        //     function answerCheck(e) {
-        //     // check for correct answer
-        //     if (e.target.id === 'answer' + questions[questionNumber].correct) {
-        //         //fade out question
-        //         $('bubble').classList.add('animated', 'bounceOut')
-        //         $('answersGrid').classList.add('animated', 'fadeOut')
-
-        //         // fade in correct answer, explanation, and next question button
-        //         appendTemplate('nextTemplate', 'innerGrid')
-        //         $('explanation').innerHTML = questions[questionNumber].explanation
-
-        //         // fade in correct, explanation, and next
-        //         $('explanation').classList.add('animated', 'fadeIn')
-        //         $('next').classList.add('animated', 'fadeIn')
-        //         $('correct').classList.add('animated', 'tada')
-
-        //          // update score
-        //          score++
-        //          updateScore()
-        //     } else {
-        //         $(e.target.id).classList.add('animated', 'shake')
-        //     }
-        // })
     })
     .catch(error => {
         console.error('Error fetching question data:', error)
