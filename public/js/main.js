@@ -1,11 +1,11 @@
 // shorten id calls
-var $ = function(id) {
+const $ = function(id) {
     return document.getElementById(id)
 }
 
 // append template HTML
 function appendTemplate(childId, parentId) {
-    var clon = $(childId).content.cloneNode(true)
+    const clon = $(childId).content.cloneNode(true)
     $(parentId).appendChild(clon)
 }
 
@@ -33,20 +33,10 @@ function beginQuestionFlow() {
     fetch('data/questions.json')
     .then(response => response.json())
     .then(questions => {
-        // append question template HTML
-        appendTemplate('questionTemplate', 'innerGrid')
-
-        // set question number and question data
-        var questionNumber = 0
-
-        // set the user's score
-        var score = 0
-
         // update the user's score
         function updateScore() {
             $('score').innerHTML = `Score: ${score}/${questions.length}`
         }
-        updateScore()
 
         // set question data
         function setQuestionData() {
@@ -60,6 +50,7 @@ function beginQuestionFlow() {
                 $('answer2').classList.add('animated', 'fadeIn')
 
             } else {
+                // remove begin button
                 setTimeout(() => {
                     $('innerGrid').removeChild($('begin'))
                 }, 300);
@@ -74,32 +65,45 @@ function beginQuestionFlow() {
             $('bubble').classList.add('animated', 'bounceIn')
         }
 
+        // append question template HTML
+        appendTemplate('questionTemplate', 'innerGrid')
+
+        // set question number and question data
+        let questionNumber = 0
+
+        // set the user's score
+        let score = 0
+
+        // update and show score
+        updateScore()
+
+        // set first question data to appended HTML
         setQuestionData()
 
+        // check to see if clicked target is the correct answer
         $('answersGrid').addEventListener("click", 
                 function answerCheck(e) {
                 // check for correct answer
                 if (e.target.id === 'answer' + questions[questionNumber].correct) {
-                    // remove previous animations
+                    // remove previous animations except on the first question
                     if (questionNumber !== 0) {
                         $('explanation').classList.remove('animated', 'fadeIn', 'fadeOut')
                         $('next').classList.remove('animated', 'fadeIn', 'fadeOut')
                         $('correct').classList.remove('animated', 'tada', 'fadeOut')
                     }
 
-                    //fade out question
+                    //fade out question and answers
                     $('bubble').classList.add('animated', 'bounceOut')
                     $('answer1').classList.add('animated', 'fadeOut')
                     $('answer2').classList.add('animated', 'fadeOut')
 
                     if (questionNumber === 0) {
-                        // append next question button and question explanation
+                        // append next question button and question explanation on the first question
                         appendTemplate('nextTemplate', 'innerGrid')
                         appendTemplate('explanationTemplate', 'innerGrid')
                     }
 
-                    // append explanation and correct template
-    
+                    // set explanation HTML
                     $('explanation').innerHTML = questions[questionNumber].explanation
 
                     // fade in correct, explanation, and next
@@ -122,18 +126,22 @@ function beginQuestionFlow() {
                             $('correct').classList.add('animated', 'fadeOut')
                             $('explanation').classList.add('animated', 'fadeOut')
 
-                            if (questionNumber > 5) {
-                                console.log(questionNumber)
+                            // end the quiz if questionNumber is greater than the number of questions, append final HMTL
+                            if (questionNumber > questions.length - 1) {
                                 appendTemplate('thanksTemplate', 'innerGrid')
-                                console.log('Reached end of questionaire.')
                             } else {
-                                // set next question
+                                // set next question if questionNumber is still less than the total number of questions
                                 setQuestionData()
                             }
                         })
                 } else {
+                    // remove existing or previously established entry classes
                     $(e.target.id).classList.remove('animated', 'fadeIn')
+
+                    // shake the answer if the answer is in correct, subtle animation prompts errorless teaching
                     $(e.target.id).classList.add('animated', 'shake')
+
+                    // remove shake animation after shake is complete in case the user tries the same incorrect answer more than once
                     setTimeout(() => {
                         $(e.target.id).classList.remove('animated', 'shake')
                     }, 700);
@@ -145,4 +153,5 @@ function beginQuestionFlow() {
     })
 }
 
+// begin question flow on begin button press
 $('begin').addEventListener('click', beginQuestionFlow)
